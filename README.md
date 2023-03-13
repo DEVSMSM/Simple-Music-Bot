@@ -3,13 +3,12 @@ All Copyright By SmSm
 
 <img src = "https://discord.c99.nl/widget/theme-2/349942964904001546.png"></div>
 
-- Simple Advanced Discord Music Bot  
-
+- Simple Advanced Discord Music Bot With 20 Music Commands
 
 
 # Features 
 - Bot Support Youtube & SoundCloud & Spotify
-- Bot Support To Many Filters 
+- Bot Support Custom Filters 
 - Bot Support Autoplay and High Volume Quality.
 
 # Tutorial
@@ -19,7 +18,7 @@ All Copyright By SmSm
 
 
 # Run on
-[![Remix on Glitch](https://cdn.glitch.com/2703baf2-b643-4da7-ab91-7ee2a2d00b5b%2Fremix-button.svg)](https://glitch.com/edit/#!/import/github/https://github.com/DEVSMSM/Partner-Bot-V14/https://github.com/DEVSMSM/Partner-Bot-V14)
+[![Remix on Glitch](https://cdn.glitch.com/2703baf2-b643-4da7-ab91-7ee2a2d00b5b%2Fremix-button.svg)](https://glitch.com/edit/#!/import/github/https://github.com/DEVSMSM/Simple-Music-Bot/blob/main/README.md/Enter your GitHub repo name e.g. react-tutorial)
 [![Run on Replit](https://replit.com/badge/github/DEVSMSM/Simple-Music-Bot)](https://replit.com/new/github/DEVSMSM/Simple-Music-Bot)
 
 
