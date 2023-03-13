@@ -30,7 +30,7 @@ client.distube = new DisTube(client, {
     new YtDlpPlugin()
   ],
 savePreviousSongs: true,
-youtubeCookie: process.env.cookie,
+youtubeCookie: process.env.cookie, // PUT COOKIE HERE
 })
 client.commands = new Discord.Collection()
 client.aliases = new Discord.Collection()
@@ -38,9 +38,9 @@ client.emotes = config.emoji
 
 fs.readdir('./commands/', (err, files) => {
   if (err) return console.log('Could not find any commands!')
-  const jsFiles = files.filter(f => f.split('.').pop() === 'js')
-  if (jsFiles.length <= 0) return console.log('Could not find any commands!')
-  jsFiles.forEach(file => {
+  const Files = files.filter(f => f.split('.').pop() === 'js')
+  if (Files.length <= 0) return console.log('Could not find any commands!')
+  Files.forEach(file => {
     const cmd = require(`./commands/${file}`)
     console.log(`Loaded ${file}`)
     client.commands.set(cmd.name, cmd)
@@ -49,8 +49,7 @@ fs.readdir('./commands/', (err, files) => {
 })
 
 client.on('ready', () => {
-  console.log(`${client.user.tag} is ready to play music.`)
-  console.log(`Way Chan Xosha Online Bom`)
+ console.log(`${client.user.tag} is Ready To Play Music.`)
 client.user.setStatus('idle')
 })
 
