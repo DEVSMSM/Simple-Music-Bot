@@ -18,7 +18,7 @@ All Copyright By SmSm
 
 
 # Run on
-<a href="https://glitch.com/edit/#!/discord-account-online?path=tokens.txt%3A2%3A0"><img src="https://cdn.glitch.com/2703baf2-b643-4da7-ab91-7ee2a2d00b5b%2Fremix-button.svg" alt="Remix on Glitch" /></a>
+<a href="https://glitch.com/edit/#!/simple-music-bot-v14"><img src="https://cdn.glitch.com/2703baf2-b643-4da7-ab91-7ee2a2d00b5b%2Fremix-button.svg" alt="Remix on Glitch" /></a>
 [![Run on Replit](https://replit.com/badge/github/DEVSMSM/Simple-Music-Bot)](https://replit.com/new/github/DEVSMSM/Simple-Music-Bot)
 
 
