@@ -14,13 +14,17 @@
     "@distube/spotify": "^2.0.2",
     "@distube/yt-dlp": "^2.0.1",
     "@distube/ytdl-core": "^4.16.12",
+    "colors": "^1.4.0",
     "discord.js": "^14.21.0",
     "distube": "^5.0.7",
+    "dotenv": "^17.2.1",
     "ffmpeg-static": "^5.2.0",
     "libsodium-wrappers": "^0.7.15"
   },
   "devDependencies": {
     "node": "^22.18.0",
-    "npm": "^11.5.2"
+    "nodemon": "^3.1.10",
+    "npm": "^11.5.2",
+    "npm-check-updates": "^18.0.2"
   }
 }

@@ -1,5 +1,6 @@
+require("dotenv").config()
 const { DisTube } = require('distube')
-const { GatewayIntentBits , Collection ,  Client} = require('js')
+const { GatewayIntentBits , Collection ,  Client , ChannelType } = require('discord.js')
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -16,37 +17,24 @@ const { YtDlpPlugin } = require('@distube/yt-dlp')
 
 client.config = require('./config.json')
 client.distube = new DisTube(client, {
-  leaveOnStop: true,
-  leaveOnEmpty: false,
-  leaveOnFinish: false,
-  emitNewSongOnly: true,
-  emitAddSongWhenCreatingQueue: false,
-  emitAddListWhenCreatingQueue: false,
+
   plugins: [
     new SoundCloudPlugin(),
-    new SpotifyPlugin({
-      emitEventsAfterFetching: true
-    }),   
+    new SpotifyPlugin(),
     new YtDlpPlugin()
   ],
-savePreviousSongs: true,
-youtubeCookie: process.env.cookie, // PUT COOKIE HERE
 })
+client.distube.setMaxListeners(3); // or whatever number you need
+
 client.commands = new Collection()
 client.aliases = new Collection()
 client.emotes = config.emoji
 
-fs.readdir('./commands/', (err, files) => {
-  if (err) return console.log('Could not find any commands!')
-  const Files = files.filter(f => f.split('.').pop() === 'js')
-  if (Files.length <= 0) return console.log('Could not find any commands!')
-  Files.forEach(file => {
-    const cmd = require(`./commands/${file}`)
-    console.log(`Loaded ${file}`)
-    client.commands.set(cmd.name, cmd)
-    if (cmd.aliases) cmd.aliases.forEach(alias => client.aliases.set(alias, cmd.name))
-  })
+
+fs.readdirSync('./handlers').map(handler => {
+require(`./handlers/${handler}`)(client)
 })
+
 
 client.on('ready', () => {
  console.log(`${client.user.tag} is Ready To Play Music.`)
@@ -72,6 +60,25 @@ client.on('messageCreate', async message => {
   }
 })
 
+client.on('voiceStateUpdate', (ns) => {
+  if (!ns.guild || ns.member.user.bot) return;
+
+  // auto speak in stage channel
+  if (
+    ns.channelId &&
+    ns.channel.type === ChannelType.GuildStageVoice &&
+    ns.guild.members.me.voice.suppress
+  ) {
+    if (
+      ns.guild.members.me.permissions.has("Speak") ||
+      (ns.channel && ns.channel.permissionsFor(ns.guild.members.me).has("Speak"))
+    ) {
+      ns.guild.members.me.voice.setSuppressed(false).catch((e) => {
+        console.log(e)
+      });
+    }
+  }
+})
 const status = queue =>
   `Volume: \`${queue.volume}%\` | Filter: \`${queue.filters.names.join(', ') || 'Off'}\` | Loop: \`${
     queue.repeatMode ? (queue.repeatMode === 2 ? 'All Queue' : 'This Song') : 'Off'
@@ -100,11 +107,11 @@ client.distube
     if (channel) channel.send(`${client.emotes.error} | An error encountered: ${e.toString().slice(0, 1974)}`)
     else console.error(e)
   })
-  .on('empty', channel => channel.send('Voice channel is empty! Leaving the channel...'))
+  .on('empty', queue => queue.textChannel.send('Voice channel is empty! Leaving the channel...'))
   .on('searchNoResult', (message, query) =>
     message.channel.send(`${client.emotes.error} | No result found for \`${query}\`!`)
   )
   .on('finish', queue => queue.textChannel.send('Finished!'))
+  .on('error', error => console.log(error))
 
-
-client.login(process.env.token)
+client.login(process.env.TOKEN)
